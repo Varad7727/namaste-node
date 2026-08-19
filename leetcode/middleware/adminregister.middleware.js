@@ -5,6 +5,7 @@ const redisClient = require("../config/redis");
 const adminMiddleware = async (req, res, next) => {
     try {
         // Retrieve token from cookies
+        console.log("COOKIES:", req.cookies);
         const { token } = req.cookies;
 
         if (!token) {
@@ -25,8 +26,8 @@ const adminMiddleware = async (req, res, next) => {
 
         // Check user exists
         const result = await User.findById(_id);
-          
-        if(payload.role!="admin"){
+
+        if (payload.role != "admin") {
             throw new Error("Invalid Token");
         }
 
